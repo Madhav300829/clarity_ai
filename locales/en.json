@@ -1,0 +1,486 @@
+
+{
+  "common": {
+    "hourAbr": "hr",
+    "contact": "Contact",
+    "backToRoleSelection": "Back to role selection",
+    "backToLoginOptions": "Back to login options",
+    "backToLogin": "Back to Login",
+    "email": "Email",
+    "password": "Password",
+    "phoneNumber": "Phone Number",
+    "name": "Full Name",
+    "edit": "Edit",
+    "remove": "Remove",
+    "cancel": "Cancel"
+  },
+  "header": {
+    "home": "Home",
+    "chatbot": "Chatbot",
+    "search": "Search",
+    "knowledgeHub": "Knowledge Hub",
+    "hireUs": "Hire Us",
+    "dashboard": "Dashboard",
+    "login": "Login",
+    "logout": "Logout",
+    "signUp": "Sign Up",
+    "aria": {
+      "viewNotifications": "View notifications",
+      "customizeAppearance": "Customize appearance",
+      "changeLanguage": "Change language"
+    }
+  },
+  "footer": {
+    "tagline": "Bringing Intelligence and Innovation Together.",
+    "products": {
+      "title": "Products",
+      "features": "Features",
+      "search": "Search",
+      "knowledgeHub": "Knowledge Hub",
+      "hireUs": "Hire Us"
+    },
+    "company": {
+      "title": "Company",
+      "about": "About",
+      "careers": "Careers"
+    },
+    "support": {
+      "title": "Support",
+      "contact": "Contact",
+      "helpCenter": "Help Center"
+    },
+    "copyright": "© {{year}} ClarityAI. All rights reserved."
+  },
+  "hero": {
+    "title": "Your Gateway to Smarter Learning &<br />Intelligent Collaboration",
+    "subtitle": "Bringing Intelligence and Innovation Together, Where Curiosity Meets Clarity.",
+    "acronym": "Learning And Research Assistant",
+    "requestDemo": "Request a Demo",
+    "learnMore": "Learn More"
+  },
+  "stats": {
+    "queriesResolved": "Queries Resolved",
+    "expertsOnboarded": "Experts Onboarded",
+    "projectsCompleted": "Projects Completed"
+  },
+  "features": {
+    "title": "One Platform, Endless Possibilities",
+    "subtitle": "ClarityAI integrates powerful tools to streamline your workflow.",
+    "search": {
+      "title": "AI-Powered Search",
+      "description": "Get synthesized answers from the web with cited sources."
+    },
+    "chatbot": {
+      "title": "Conversational AI",
+      "description": "Brainstorm, solve problems, and learn with our intelligent assistant."
+    },
+    "knowledge": {
+      "title": "Knowledge Hub",
+      "description": "Tap into community wisdom and expert-verified answers."
+    },
+    "hire": {
+      "title": "Hire Experts",
+      "description": "Find and collaborate with top-tier freelancers for your projects."
+    }
+  },
+  "about": {
+    "mission": "Our Mission",
+    "title": "Demystifying Complexity, Empowering Curiosity",
+    "subtitle": "Welcome to ClarityAI",
+    "paragraph1": "We believe that access to clear, accurate information is the cornerstone of progress. In a world saturated with data, finding reliable answers and expert insights can be a monumental task. ClarityAI was born from a simple yet powerful idea: to create a single, intuitive platform that cuts through the noise.",
+    "paragraph2": "Our integrated suite of tools—from an intelligent AI Chatbot to a curated Freelancer Marketplace—is designed to empower students, professionals, and lifelong learners to achieve their goals with confidence and clarity."
+  },
+  "contact": {
+    "title": "Get in Touch",
+    "subtitle": "Have a question or feedback? We'd love to hear from you.",
+    "name": {
+      "label": "Name",
+      "placeholder": "Your Name"
+    },
+    "email": {
+      "label": "Email",
+      "placeholder": "your.email@example.com"
+    },
+    "message": {
+      "label": "Message",
+      "placeholder": "How can we help you?"
+    },
+    "sendMessage": "Send Message",
+    "successMessage": "Message sent successfully!"
+  },
+  "careers": {
+    "title": "Join Our Team",
+    "subtitle": "We're looking for passionate individuals to help us build the future of information access.",
+    "applyNow": "Apply Now",
+    "jobs": {
+      "locationRemote": "Remote",
+      "departmentEngineering": "Engineering",
+      "departmentAI": "AI Research",
+      "departmentDesign": "Design",
+      "frontend": {
+        "title": "Senior Frontend Engineer"
+      },
+      "ai": {
+        "title": "AI Research Scientist"
+      },
+      "designer": {
+        "title": "Product Designer (UI/UX)"
+      },
+      "devops": {
+        "title": "DevOps Engineer"
+      }
+    }
+  },
+  "help": {
+    "title": "Help Center",
+    "subtitle": "Find answers to common questions and get support.",
+    "topics": {
+      "gettingStarted": {
+        "title": "Getting Started",
+        "description": "Learn the basics of using ClarityAI."
+      },
+      "billing": {
+        "title": "Account & Billing",
+        "description": "Manage your subscription and payment details."
+      },
+      "marketplace": {
+        "title": "Freelancer Marketplace",
+        "description": "How to hire experts or offer your services."
+      },
+      "api": {
+        "title": "API & Integrations",
+        "description": "Connect ClarityAI with your own applications."
+      }
+    }
+  },
+  "dashboard": {
+    "title": "Welcome Back!",
+    "subtitle": "Here's a snapshot of your recent activity.",
+    "quickActions": {
+      "title": "Quick Actions",
+      "startSearch": "Start a New Search",
+      "hireExpert": "Hire an Expert"
+    },
+    "myTasks": {
+      "title": "My Tasks",
+      "due": "Due: {{date}}",
+      "overdue": "Overdue",
+      "dueToday": "Due Today"
+    },
+    "recentKnowledge": {
+      "title": "Recent in Knowledge Hub"
+    },
+    "featuredExperts": {
+      "title": "Featured Experts"
+    },
+    "myWallet": {
+      "title": "My Wallet",
+      "credits": "Credits",
+      "funds": "Funds",
+      "balance": "Available Balance",
+      "addFunds": "Add Funds",
+      "withdraw": "Withdraw",
+      "currency": "Currency"
+    },
+    "myCredits": {
+      "title": "My Credits",
+      "description": "Earn credits by liking helpful answers from other users in the Knowledge Hub.",
+      "tooltip": "Redemption coming soon! Use credits for discounts on hiring experts and future features."
+    }
+  },
+  "chatbot": {
+    "welcomeMessage": "Hello! I'm LARA, your Learning And Research Assistant. How can I help you achieve clarity today?",
+    "errorMessage": "I'm sorry, but I encountered an issue. Please try sending your message again.",
+    "title": "How can I help you today?",
+    "prompt1": "Explain quantum computing in simple terms",
+    "prompt2": "Draft an email to a client about a project delay",
+    "prompt3": "What are the best practices for hiring a freelance developer?",
+    "inputPlaceholder": "Ask me anything...",
+    "aria": {
+      "chatInput": "Chat input",
+      "sendMessage": "Send message"
+    }
+  },
+  "search": {
+    "title": "AI-Powered Search",
+    "subtitle": "Get clear, synthesized answers from across the web.",
+    "inputPlaceholder": "Ask anything...",
+    "loading": "Loading...",
+    "synthesizing": "Synthesizing answer...",
+    "results": {
+      "summary": "AI Summary",
+      "keyPoints": "Key Points",
+      "relatedSearches": "Related Searches",
+      "sources": "Sources",
+      "imageSuggestions": "Image Search Suggestions"
+    }
+  },
+  "knowledge": {
+    "title": "Knowledge Hub",
+    "subtitle": "Explore community questions and expert-driven answers.",
+    "searchPlaceholder": "Filter questions...",
+    "askNewQuestion": "Ask a New Question",
+    "askQuestion": "Ask a Question",
+    "tabs": {
+      "community": "Community",
+      "myQuestions": "My Questions"
+    },
+    "aiAnswer": "LARA's Answer",
+    "generatingAnswer": "Generating AI answer...",
+    "communityAnswers": "Community Answers ({{count}})",
+    "noCommunityAnswers": "Be the first to share your knowledge!",
+    "addYourAnswer": "Add Your Answer",
+    "shareKnowledgePlaceholder": "Share your knowledge or experience...",
+    "addImage": "Add Image",
+    "submitAnswer": "Submit Answer",
+    "questionImageAlt": "Image attached to the question",
+    "answerImageAlt": "Image attached to an answer",
+    "answerPreviewAlt": "Answer image preview",
+    "noQuestions": {
+      "community": {
+        "title": "No matching questions",
+        "subtitle": "Try a different search term or ask a new question."
+      },
+      "mine": {
+        "title": "You haven't asked any questions yet",
+        "subtitle": "Ask a question to get insights from the AI and community."
+      }
+    },
+    "initialQuestions": {
+      "q1": "What are the best practices for state management in large React applications?",
+      "q2": "How does the Gemini API's function calling work?",
+      "q3": "Tips for improving SEO on a Next.js website?",
+      "q4": "What's the difference between supervised and unsupervised machine learning?",
+      "q5": "How can I build a successful career as a freelancer?"
+    },
+    "aria": {
+      "filter": "Filter questions",
+      "likeAnswer": "Like this answer",
+      "unlikeAnswer": "Unlike this answer"
+    }
+  },
+  "hire": {
+    "title": "Hire Top-Tier Experts",
+    "subtitle": "Find the perfect freelancer for your next project.",
+    "searchPlaceholder": "Search by name, skill, or title...",
+    "filters": "Filters",
+    "noResults": "No freelancers match your criteria.",
+    "aria": {
+      "filterFreelancers": "Filter freelancers"
+    }
+  },
+  "filter": {
+    "title": "Filters",
+    "clearAll": "Clear All",
+    "domain": {
+      "label": "Domain",
+      "all": "All Domains"
+    },
+    "payRate": {
+      "label": "Pay Rate ($/hr)",
+      "min": "Min",
+      "max": "Max"
+    },
+    "experience": {
+      "label": "Experience",
+      "1plus": "1+ years",
+      "3plus": "3+ years",
+      "5plus": "5+ years",
+      "10plus": "10+ years"
+    },
+    "rating": {
+      "label": "Rating",
+      "4plus": "4+ stars",
+      "3plus": "3+ stars"
+    },
+    "skills": {
+      "label": "Skills ({{count}})"
+    }
+  },
+  "loginModal": {
+    "titles": {
+      "role": "How are you using ClarityAI?",
+      "method": "Select Login Method",
+      "email": "Login with Email",
+      "phone": "Login with Phone",
+      "otp": "Enter Verification Code",
+      "forgotPassword": "Forgot Password",
+      "resetLinkSent": "Check Your Email",
+      "resetPassword": "Reset Your Password"
+    },
+    "role": {
+      "consumer": {
+        "title": "I'm a Consumer",
+        "description": "For learning, research, and general use."
+      },
+      "expert": {
+        "title": "I'm an Expert / Freelancer",
+        "description": "Offer your services on our marketplace."
+      }
+    },
+    "method": {
+      "email": "Continue with Email",
+      "phone": "Continue with Phone"
+    },
+    "forgotPassword": "Forgot password?",
+    "sendCode": "Send Code",
+    "sendResetLink": "Send Reset Link",
+    "proceedToReset": "Proceed to Reset (Simulated)",
+    "resetPassword": "Reset Password",
+    "newPassword": "New Password",
+    "confirmNewPassword": "Confirm New Password",
+    "forgotPasswordInstruction": "Enter the email associated with your account and we'll send a link to reset your password.",
+    "resetLinkSentInstruction": "A password reset link has been sent to",
+    "createNewPasswordInstruction": "Create a new, strong password for your account.",
+    "testCredentials": {
+      "intro": "Use test credentials",
+      "and": "and"
+    },
+    "passwordResetSuccess": "Password has been reset successfully! You can now log in."
+  },
+  "signUpModal": {
+    "titles": {
+      "role": "How will you be using ClarityAI?",
+      "form": "Create Your Account",
+      "otp": "Verify Your Phone Number"
+    },
+    "role": {
+      "consumer": {
+        "title": "I'm a Consumer",
+        "description": "For learning, research, and general use."
+      },
+      "expert": {
+        "title": "I'm an Expert / Freelancer",
+        "description": "Offer your services on our marketplace."
+      }
+    },
+    "namePlaceholder": "Jane Doe",
+    "confirmPassword": "Confirm Password",
+    "sendVerificationCode": "Send Verification Code",
+    "verifying": "Verifying and creating account...",
+    "successMessage": "Account created successfully! You can now log in."
+  },
+  "askQuestionModal": {
+    "title": "Ask a New Question",
+    "question": {
+      "label": "Question Title",
+      "placeholder": "e.g., How do I use the Gemini API in a React app?"
+    },
+    "description": {
+      "label": "Description (Optional)",
+      "placeholder": "Add more details, context, or code snippets here."
+    },
+    "image": {
+      "label": "Image (Optional)"
+    },
+    "editImage": "Edit Image",
+    "remove": "Remove",
+    "uploadFile": "Upload a file",
+    "dragAndDrop": "or drag and drop",
+    "fileTypes": "PNG, JPG, GIF up to 10MB",
+    "postQuestion": "Post Question"
+  },
+  "imageEditor": {
+    "title": "Edit Image",
+    "imagePreviewAlt": "Image preview",
+    "editing": "Editing...",
+    "instruction": {
+      "label": "Instruction",
+      "placeholder": "e.g., Add a futuristic background"
+    },
+    "applyEdit": "Apply Edit",
+    "saveImage": "Save Image",
+    "error": {
+      "process": "Failed to process the image. Please try a different prompt.",
+      "general": "An unexpected error occurred."
+    }
+  },
+  "modal": {
+    "close": "Close modal"
+  },
+  "otp": {
+    "enterCodeSentTo": "Enter the 6-digit code sent to",
+    "useTestCode": "Use test code:",
+    "changePhoneNumber": "Change phone number?",
+    "resendIn": "Resend code in",
+    "resend": "Resend Code",
+    "aria": {
+      "digit": "OTP digit {{index}}"
+    }
+  },
+  "countryCode": {
+    "aria": {
+      "countryCode": "Country code selector"
+    }
+  },
+  "country": {
+    "usa": "USA",
+    "uk": "UK",
+    "india": "India",
+    "australia": "Australia",
+    "japan": "Japan",
+    "germany": "Germany",
+    "france": "France"
+  },
+  "inputField": {
+    "aria": {
+      "showPassword": "Show password",
+      "hidePassword": "Hide password"
+    }
+  },
+  "chatWidget": {
+    "online": "Online",
+    "inputPlaceholder": "Type a message..."
+  },
+  "appearance": {
+    "title": "Appearance",
+    "mode": "Mode",
+    "light": "Light",
+    "dark": "Dark",
+    "colors": "Colors",
+    "images": "Images",
+    "custom": "Custom",
+    "uploadImage": "Upload Image",
+    "aria": {
+      "setBackgroundColor": "Set background color to {{colorName}}",
+      "setBackgroundImage": "Set background image to {{imageName}}"
+    }
+  },
+  "notifications": {
+    "title": "Notifications",
+    "markAllAsRead": "Mark all as read",
+    "mock": {
+      "newAnswer": "Alex W. answered your question about React state management.",
+      "aiAnswerReady": "Your AI-generated answer for 'What is SEO?' is ready.",
+      "newMessage": "You have a new message from Diana Miller regarding your project proposal.",
+      "welcome": "Welcome to ClarityAI! Explore our features to get started."
+    },
+    "time": {
+      "minutes": "{{count}}m ago",
+      "hours": "{{count}}h ago",
+      "days": "{{count}}d ago"
+    }
+  },
+  "languageSwitcher": {
+    "title": "Select Language"
+  },
+  "currency": {
+    "USD": "USD - US Dollar",
+    "EUR": "EUR - Euro",
+    "GBP": "GBP - British Pound",
+    "JPY": "JPY - Japanese Yen"
+  },
+  "error": {
+    "auth": {
+      "invalidCredentials": "Invalid email or password. Please check your details and try again.",
+      "invalidOtp": "The verification code is incorrect. Please double-check the code and try again.",
+      "passwordsDoNotMatch": "The passwords you entered do not match. Please re-enter them carefully.",
+      "sessionExpired": "Your verification session has expired. Please request a new code to continue.",
+      "invalidPhoneNumber": "The phone number doesn't look right. Please check the format, including the country code.",
+      "networkError": "A network error occurred. Please check your internet connection and try again.",
+      "unknown": "An unexpected error occurred. Please try again later or contact support.",
+      "tokenMissing": "This service is not configured correctly. Please contact support for assistance.",
+      "sessionError": "Could not start the verification process. Please refresh and try again."
+    }
+  }
+}

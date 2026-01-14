@@ -1,0 +1,486 @@
+
+{
+  "common": {
+    "hourAbr": "Std.",
+    "contact": "Kontakt",
+    "backToRoleSelection": "Zurück zur Rollenauswahl",
+    "backToLoginOptions": "Zurück zu den Anmeldeoptionen",
+    "backToLogin": "Zurück zum Login",
+    "email": "E-Mail",
+    "password": "Passwort",
+    "phoneNumber": "Telefonnummer",
+    "name": "Vollständiger Name",
+    "edit": "Bearbeiten",
+    "remove": "Entfernen",
+    "cancel": "Abbrechen"
+  },
+  "header": {
+    "home": "Start",
+    "chatbot": "Chatbot",
+    "search": "Suche",
+    "knowledgeHub": "Wissenszentrum",
+    "hireUs": "Beauftragen",
+    "dashboard": "Dashboard",
+    "login": "Anmelden",
+    "logout": "Abmelden",
+    "signUp": "Registrieren",
+    "aria": {
+      "viewNotifications": "Benachrichtigungen anzeigen",
+      "customizeAppearance": "Erscheinungsbild anpassen",
+      "changeLanguage": "Sprache ändern"
+    }
+  },
+  "footer": {
+    "tagline": "Intelligenz und Innovation zusammenbringen.",
+    "products": {
+      "title": "Produkte",
+      "features": "Funktionen",
+      "search": "Suche",
+      "knowledgeHub": "Wissenszentrum",
+      "hireUs": "Beauftragen"
+    },
+    "company": {
+      "title": "Unternehmen",
+      "about": "Über uns",
+      "careers": "Karriere"
+    },
+    "support": {
+      "title": "Support",
+      "contact": "Kontakt",
+      "helpCenter": "Hilfezentrum"
+    },
+    "copyright": "© {{year}} ClarityAI. Alle Rechte vorbehalten."
+  },
+  "hero": {
+    "title": "Ihr Tor zu intelligenterem Lernen &<br />intelligenter Zusammenarbeit",
+    "subtitle": "Intelligenz und Innovation zusammenbringen, wo Neugier auf Klarheit trifft.",
+    "acronym": "Lern- und Forschungsassistent",
+    "requestDemo": "Demo anfordern",
+    "learnMore": "Mehr erfahren"
+  },
+  "stats": {
+    "queriesResolved": "Anfragen gelöst",
+    "expertsOnboarded": "Experten an Bord",
+    "projectsCompleted": "Projekte abgeschlossen"
+  },
+  "features": {
+    "title": "Eine Plattform, unendliche Möglichkeiten",
+    "subtitle": "ClarityAI integriert leistungsstarke Tools zur Optimierung Ihres Workflows.",
+    "search": {
+      "title": "KI-gestützte Suche",
+      "description": "Erhalten Sie zusammengefasste Antworten aus dem Web mit zitierten Quellen."
+    },
+    "chatbot": {
+      "title": "Konversationelle KI",
+      "description": "Brainstormen, Probleme lösen und lernen mit unserem intelligenten Assistenten."
+    },
+    "knowledge": {
+      "title": "Wissenszentrum",
+      "description": "Nutzen Sie das Wissen der Community und von Experten geprüfte Antworten."
+    },
+    "hire": {
+      "title": "Experten beauftragen",
+      "description": "Finden und arbeiten Sie mit erstklassigen Freelancern für Ihre Projekte zusammen."
+    }
+  },
+  "about": {
+    "mission": "Unsere Mission",
+    "title": "Komplexität entmystifizieren, Neugierde fördern",
+    "subtitle": "Willkommen bei ClarityAI",
+    "paragraph1": "Wir glauben, dass der Zugang zu klaren, genauen Informationen der Grundstein für den Fortschritt ist. In einer Welt voller Daten kann die Suche nach zuverlässigen Antworten und Experteneinsichten eine monumentale Aufgabe sein. ClarityAI entstand aus einer einfachen, aber wirkungsvollen Idee: eine einzige, intuitive Plattform zu schaffen, die den Lärm durchdringt.",
+    "paragraph2": "Unsere integrierte Suite von Tools – von einem intelligenten KI-Chatbot bis zu einem kuratierten Freelancer-Marktplatz – soll Studenten, Fachleuten und lebenslangen Lernern ermöglichen, ihre Ziele mit Vertrauen und Klarheit zu erreichen."
+  },
+  "contact": {
+    "title": "Kontakt aufnehmen",
+    "subtitle": "Haben Sie eine Frage oder Feedback? Wir würden uns freuen, von Ihnen zu hören.",
+    "name": {
+      "label": "Name",
+      "placeholder": "Ihr Name"
+    },
+    "email": {
+      "label": "E-Mail",
+      "placeholder": "ihre.email@beispiel.com"
+    },
+    "message": {
+      "label": "Nachricht",
+      "placeholder": "Wie können wir Ihnen helfen?"
+    },
+    "sendMessage": "Nachricht senden",
+    "successMessage": "Nachricht erfolgreich gesendet!"
+  },
+  "careers": {
+    "title": "Werden Sie Teil unseres Teams",
+    "subtitle": "Wir suchen leidenschaftliche Menschen, die uns helfen, die Zukunft des Informationszugangs zu gestalten.",
+    "applyNow": "Jetzt bewerben",
+    "jobs": {
+      "locationRemote": "Remote",
+      "departmentEngineering": "Technik",
+      "departmentAI": "KI-Forschung",
+      "departmentDesign": "Design",
+      "frontend": {
+        "title": "Senior Frontend-Entwickler"
+      },
+      "ai": {
+        "title": "KI-Forschungswissenschaftler"
+      },
+      "designer": {
+        "title": "Produktdesigner (UI/UX)"
+      },
+      "devops": {
+        "title": "DevOps-Ingenieur"
+      }
+    }
+  },
+  "help": {
+    "title": "Hilfezentrum",
+    "subtitle": "Finden Sie Antworten auf häufig gestellte Fragen und erhalten Sie Unterstützung.",
+    "topics": {
+      "gettingStarted": {
+        "title": "Erste Schritte",
+        "description": "Lernen Sie die Grundlagen der Nutzung von ClarityAI."
+      },
+      "billing": {
+        "title": "Konto & Abrechnung",
+        "description": "Verwalten Sie Ihr Abonnement und Ihre Zahlungsdetails."
+      },
+      "marketplace": {
+        "title": "Freelancer-Marktplatz",
+        "description": "Wie man Experten beauftragt oder seine Dienste anbietet."
+      },
+      "api": {
+        "title": "API & Integrationen",
+        "description": "Verbinden Sie ClarityAI mit Ihren eigenen Anwendungen."
+      }
+    }
+  },
+  "dashboard": {
+    "title": "Willkommen zurück!",
+    "subtitle": "Hier ist eine Momentaufnahme Ihrer letzten Aktivitäten.",
+    "quickActions": {
+      "title": "Schnellaktionen",
+      "startSearch": "Neue Suche starten",
+      "hireExpert": "Experten beauftragen"
+    },
+    "myTasks": {
+      "title": "Meine Aufgaben",
+      "due": "Fällig: {{date}}",
+      "overdue": "Überfällig",
+      "dueToday": "Heute fällig"
+    },
+    "recentKnowledge": {
+      "title": "Neues im Wissenszentrum"
+    },
+    "featuredExperts": {
+      "title": "Vorgestellte Experten"
+    },
+    "myWallet": {
+      "title": "Meine Brieftasche",
+      "credits": "Guthaben",
+      "funds": "Mittel",
+      "balance": "Verfügbares Guthaben",
+      "addFunds": "Geld hinzufügen",
+      "withdraw": "Abheben",
+      "currency": "Währung"
+    },
+    "myCredits": {
+      "title": "Meine Credits",
+      "description": "Verdienen Sie Credits, indem Sie hilfreiche Antworten von anderen Benutzern im Wissenszentrum liken.",
+      "tooltip": "Einlösung bald verfügbar! Verwenden Sie Credits für Rabatte bei der Beauftragung von Experten und für zukünftige Funktionen."
+    }
+  },
+  "chatbot": {
+    "welcomeMessage": "Hallo! Ich bin LARA, Ihr Lern- und Forschungsassistent. Wie kann ich Ihnen heute helfen, Klarheit zu schaffen?",
+    "errorMessage": "Es tut mir leid, aber es ist ein Problem aufgetreten. Bitte versuchen Sie, Ihre Nachricht erneut zu senden.",
+    "title": "Wie kann ich Ihnen heute helfen?",
+    "prompt1": "Erklären Sie Quantencomputing in einfachen Worten",
+    "prompt2": "Entwerfen Sie eine E-Mail an einen Kunden über eine Projektverzögerung",
+    "prompt3": "Was sind die besten Praktiken für die Einstellung eines freiberuflichen Entwicklers?",
+    "inputPlaceholder": "Fragen Sie mich alles...",
+    "aria": {
+      "chatInput": "Chat-Eingabe",
+      "sendMessage": "Nachricht senden"
+    }
+  },
+  "search": {
+    "title": "KI-gestützte Suche",
+    "subtitle": "Erhalten Sie klare, zusammengefasste Antworten aus dem gesamten Web.",
+    "inputPlaceholder": "Fragen Sie alles...",
+    "loading": "Wird geladen...",
+    "synthesizing": "Antwort wird synthetisiert...",
+    "results": {
+      "summary": "KI-Zusammenfassung",
+      "keyPoints": "Wichtige Punkte",
+      "relatedSearches": "Ähnliche Suchen",
+      "sources": "Quellen",
+      "imageSuggestions": "Bildsuchvorschläge"
+    }
+  },
+  "knowledge": {
+    "title": "Wissenszentrum",
+    "subtitle": "Entdecken Sie Community-Fragen und von Experten geprüfte Antworten.",
+    "searchPlaceholder": "Fragen filtern...",
+    "askNewQuestion": "Neue Frage stellen",
+    "askQuestion": "Eine Frage stellen",
+    "tabs": {
+      "community": "Community",
+      "myQuestions": "Meine Fragen"
+    },
+    "aiAnswer": "LARAs Antwort",
+    "generatingAnswer": "KI-Antwort wird generiert...",
+    "communityAnswers": "Community-Antworten ({{count}})",
+    "noCommunityAnswers": "Seien Sie der Erste, der sein Wissen teilt!",
+    "addYourAnswer": "Ihre Antwort hinzufügen",
+    "shareKnowledgePlaceholder": "Teilen Sie Ihr Wissen oder Ihre Erfahrung...",
+    "addImage": "Bild hinzufügen",
+    "submitAnswer": "Antwort senden",
+    "questionImageAlt": "An die Frage angehängtes Bild",
+    "answerImageAlt": "An eine Antwort angehängtes Bild",
+    "answerPreviewAlt": "Vorschaubild der Antwort",
+    "noQuestions": {
+      "community": {
+        "title": "Keine passenden Fragen",
+        "subtitle": "Versuchen Sie einen anderen Suchbegriff oder stellen Sie eine neue Frage."
+      },
+      "mine": {
+        "title": "Sie haben noch keine Fragen gestellt",
+        "subtitle": "Stellen Sie eine Frage, um Einblicke von der KI und der Community zu erhalten."
+      }
+    },
+    "initialQuestions": {
+      "q1": "Was sind die Best Practices für das State Management in großen React-Anwendungen?",
+      "q2": "Wie funktioniert der Funktionsaufruf der Gemini-API?",
+      "q3": "Tipps zur Verbesserung des SEO auf einer Next.js-Website?",
+      "q4": "Was ist der Unterschied zwischen überwachtem und unüberwachtem maschinellem Lernen?",
+      "q5": "Wie kann ich eine erfolgreiche Karriere als Freelancer aufbauen?"
+    },
+    "aria": {
+      "filter": "Fragen filtern",
+      "likeAnswer": "Diese Antwort liken",
+      "unlikeAnswer": "Like für diese Antwort entfernen"
+    }
+  },
+  "hire": {
+    "title": "Beauftragen Sie erstklassige Experten",
+    "subtitle": "Finden Sie den perfekten Freelancer für Ihr nächstes Projekt.",
+    "searchPlaceholder": "Suche nach Name, Fähigkeit oder Titel...",
+    "filters": "Filter",
+    "noResults": "Keine Freelancer entsprechen Ihren Kriterien.",
+    "aria": {
+      "filterFreelancers": "Freelancer filtern"
+    }
+  },
+  "filter": {
+    "title": "Filter",
+    "clearAll": "Alle löschen",
+    "domain": {
+      "label": "Bereich",
+      "all": "Alle Bereiche"
+    },
+    "payRate": {
+      "label": "Stundensatz ($/Std.)",
+      "min": "Min",
+      "max": "Max"
+    },
+    "experience": {
+      "label": "Erfahrung",
+      "1plus": "1+ Jahre",
+      "3plus": "3+ Jahre",
+      "5plus": "5+ Jahre",
+      "10plus": "10+ Jahre"
+    },
+    "rating": {
+      "label": "Bewertung",
+      "4plus": "4+ Sterne",
+      "3plus": "3+ Sterne"
+    },
+    "skills": {
+      "label": "Fähigkeiten ({{count}})"
+    }
+  },
+  "loginModal": {
+    "titles": {
+      "role": "Wie verwenden Sie ClarityAI?",
+      "method": "Anmeldemethode auswählen",
+      "email": "Mit E-Mail anmelden",
+      "phone": "Mit Telefon anmelden",
+      "otp": "Bestätigungscode eingeben",
+      "forgotPassword": "Passwort vergessen",
+      "resetLinkSent": "Überprüfen Sie Ihre E-Mails",
+      "resetPassword": "Passwort zurücksetzen"
+    },
+    "role": {
+      "consumer": {
+        "title": "Ich bin ein Verbraucher",
+        "description": "Für Lernen, Forschung und allgemeine Nutzung."
+      },
+      "expert": {
+        "title": "Ich bin ein Experte / Freelancer",
+        "description": "Bieten Sie Ihre Dienste auf unserem Marktplatz an."
+      }
+    },
+    "method": {
+      "email": "Mit E-Mail fortfahren",
+      "phone": "Mit Telefon fortfahren"
+    },
+    "forgotPassword": "Passwort vergessen?",
+    "sendCode": "Code senden",
+    "sendResetLink": "Link zum Zurücksetzen senden",
+    "proceedToReset": "Mit dem Zurücksetzen fortfahren (simuliert)",
+    "resetPassword": "Passwort zurücksetzen",
+    "newPassword": "Neues Passwort",
+    "confirmNewPassword": "Neues Passwort bestätigen",
+    "forgotPasswordInstruction": "Geben Sie die mit Ihrem Konto verknüpfte E-Mail-Adresse ein und wir senden Ihnen einen Link zum Zurücksetzen Ihres Passworts.",
+    "resetLinkSentInstruction": "Ein Link zum Zurücksetzen des Passworts wurde an",
+    "createNewPasswordInstruction": "Erstellen Sie ein neues, sicheres Passwort für Ihr Konto.",
+    "testCredentials": {
+      "intro": "Verwenden Sie Test-Anmeldeinformationen",
+      "and": "und"
+    },
+    "passwordResetSuccess": "Das Passwort wurde erfolgreich zurückgesetzt! Sie können sich jetzt anmelden."
+  },
+  "signUpModal": {
+    "titles": {
+      "role": "Wie werden Sie ClarityAI verwenden?",
+      "form": "Erstellen Sie Ihr Konto",
+      "otp": "Bestätigen Sie Ihre Telefonnummer"
+    },
+    "role": {
+      "consumer": {
+        "title": "Ich bin ein Verbraucher",
+        "description": "Für Lernen, Forschung und allgemeine Nutzung."
+      },
+      "expert": {
+        "title": "Ich bin ein Experte / Freelancer",
+        "description": "Bieten Sie Ihre Dienste auf unserem Marktplatz an."
+      }
+    },
+    "namePlaceholder": "Jane Doe",
+    "confirmPassword": "Passwort bestätigen",
+    "sendVerificationCode": "Bestätigungscode senden",
+    "verifying": "Konto wird verifiziert und erstellt...",
+    "successMessage": "Konto erfolgreich erstellt! Sie können sich jetzt anmelden."
+  },
+  "askQuestionModal": {
+    "title": "Neue Frage stellen",
+    "question": {
+      "label": "Fragentitel",
+      "placeholder": "z.B. Wie verwende ich die Gemini-API in einer React-App?"
+    },
+    "description": {
+      "label": "Beschreibung (optional)",
+      "placeholder": "Fügen Sie hier weitere Details, Kontext oder Codeausschnitte hinzu."
+    },
+    "image": {
+      "label": "Bild (optional)"
+    },
+    "editImage": "Bild bearbeiten",
+    "remove": "Entfernen",
+    "uploadFile": "Datei hochladen",
+    "dragAndDrop": "oder per Drag & Drop",
+    "fileTypes": "PNG, JPG, GIF bis zu 10 MB",
+    "postQuestion": "Frage veröffentlichen"
+  },
+  "imageEditor": {
+    "title": "Bild bearbeiten",
+    "imagePreviewAlt": "Bildvorschau",
+    "editing": "Wird bearbeitet...",
+    "instruction": {
+      "label": "Anweisung",
+      "placeholder": "z.B. Füge einen futuristischen Hintergrund hinzu"
+    },
+    "applyEdit": "Bearbeitung anwenden",
+    "saveImage": "Bild speichern",
+    "error": {
+      "process": "Das Bild konnte nicht verarbeitet werden. Bitte versuchen Sie eine andere Anweisung.",
+      "general": "Ein unerwarteter Fehler ist aufgetreten."
+    }
+  },
+  "modal": {
+    "close": "Modal schließen"
+  },
+  "otp": {
+    "enterCodeSentTo": "Geben Sie den 6-stelligen Code ein, der an",
+    "useTestCode": "Verwenden Sie den Testcode:",
+    "changePhoneNumber": "Telefonnummer ändern?",
+    "resendIn": "Code erneut senden in",
+    "resend": "Code erneut senden",
+    "aria": {
+      "digit": "OTP-Ziffer {{index}}"
+    }
+  },
+  "countryCode": {
+    "aria": {
+      "countryCode": "Ländervorwahl-Auswahl"
+    }
+  },
+  "country": {
+    "usa": "USA",
+    "uk": "GB",
+    "india": "Indien",
+    "australia": "Australien",
+    "japan": "Japan",
+    "germany": "Deutschland",
+    "france": "Frankreich"
+  },
+  "inputField": {
+    "aria": {
+      "showPassword": "Passwort anzeigen",
+      "hidePassword": "Passwort verbergen"
+    }
+  },
+  "chatWidget": {
+    "online": "Online",
+    "inputPlaceholder": "Nachricht schreiben..."
+  },
+  "appearance": {
+    "title": "Erscheinungsbild",
+    "mode": "Modus",
+    "light": "Hell",
+    "dark": "Dunkel",
+    "colors": "Farben",
+    "images": "Bilder",
+    "custom": "Benutzerdefiniert",
+    "uploadImage": "Bild hochladen",
+    "aria": {
+      "setBackgroundColor": "Hintergrundfarbe auf {{colorName}} setzen",
+      "setBackgroundImage": "Hintergrundbild auf {{imageName}} setzen"
+    }
+  },
+  "notifications": {
+    "title": "Benachrichtigungen",
+    "markAllAsRead": "Alle als gelesen markieren",
+    "mock": {
+      "newAnswer": "Alex W. hat Ihre Frage zum State Management in React beantwortet.",
+      "aiAnswerReady": "Ihre KI-generierte Antwort für 'Was ist SEO?' ist fertig.",
+      "newMessage": "Sie haben eine neue Nachricht von Diana Miller bezüglich Ihres Projektvorschlags.",
+      "welcome": "Willkommen bei ClarityAI! Entdecken Sie unsere Funktionen, um loszulegen."
+    },
+    "time": {
+      "minutes": "vor {{count}}m",
+      "hours": "vor {{count}}h",
+      "days": "vor {{count}}d"
+    }
+  },
+  "languageSwitcher": {
+    "title": "Sprache auswählen"
+  },
+  "currency": {
+    "USD": "USD - US-Dollar",
+    "EUR": "EUR - Euro",
+    "GBP": "GBP - Britisches Pfund",
+    "JPY": "JPY - Japanischer Yen"
+  },
+  "error": {
+    "auth": {
+      "invalidCredentials": "Ungültige E-Mail oder ungültiges Passwort. Bitte überprüfen Sie Ihre Angaben und versuchen Sie es erneut.",
+      "invalidOtp": "Der Bestätigungscode ist falsch. Bitte überprüfen Sie den Code und versuchen Sie es erneut.",
+      "passwordsDoNotMatch": "Die eingegebenen Passwörter stimmen nicht überein. Bitte geben Sie sie sorgfältig erneut ein.",
+      "sessionExpired": "Ihre Verifizierungssitzung ist abgelaufen. Bitte fordern Sie einen neuen Code an, um fortzufahren.",
+      "invalidPhoneNumber": "Die Telefonnummer scheint nicht korrekt zu sein. Bitte überprüfen Sie das Format, einschließlich der Landesvorwahl.",
+      "networkError": "Ein Netzwerkfehler ist aufgetreten. Bitte überprüfen Sie Ihre Internetverbindung und versuchen Sie es erneut.",
+      "unknown": "Ein unerwarteter Fehler ist aufgetreten. Bitte versuchen Sie es später erneut oder kontaktieren Sie den Support.",
+      "tokenMissing": "Dieser Dienst ist nicht korrekt konfiguriert. Bitte kontaktieren Sie den Support für Unterstützung.",
+      "sessionError": "Der Verifizierungsprozess konnte nicht gestartet werden. Bitte aktualisieren Sie die Seite und versuchen Sie es erneut."
+    }
+  }
+}
