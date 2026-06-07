@@ -21,7 +21,12 @@ import { ChatWidget } from './components/ui/ChatWidget';
 import { Hero } from './components/Testimonials';
 import { logActivity, ActivityType } from './services/logService';
 import { NotificationsPanel } from './components/NotificationsPanel';
+import { WalletPanel } from './components/WalletPanel';
+import { DownloadPanel } from './components/DownloadPanel';
 import { LanguageSwitcher } from './components/LanguageSwitcher';
+import { ClarityPopup } from './components/ClarityPopup';
+import { LaraVoiceAssistant } from './components/LaraVoiceAssistant';
+import { SettingsModal, applyDynamicStyles } from './components/SettingsModal';
 
 
 export type View = 'home' | 'search' | 'knowledge' | 'hire' | 'careers' | 'help' | 'dashboard' | 'chatbot';
@@ -36,7 +41,11 @@ const App: FC = () => {
   const [background, setBackground] = useState<Background>({ type: 'vanta', value: 'globe' });
   const [isAppearancePanelOpen, setIsAppearancePanelOpen] = useState(false);
   const [isNotificationsPanelOpen, setIsNotificationsPanelOpen] = useState(false);
+  const [isWalletPanelOpen, setIsWalletPanelOpen] = useState(false);
+  const [isDownloadPanelOpen, setIsDownloadPanelOpen] = useState(false);
   const [isLanguagePanelOpen, setIsLanguagePanelOpen] = useState(false);
+  const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
+  const [isClarityPopupOpen, setIsClarityPopupOpen] = useState(true);
   
   // State for the Chat Widget
   const [isChatWidgetOpen, setIsChatWidgetOpen] = useState(false);
@@ -50,9 +59,13 @@ const App: FC = () => {
         if (savedBg) {
             setBackground(JSON.parse(savedBg));
         }
+
+        // Initialize user custom font and dynamic style overrides on mount!
+        const savedColor = localStorage.getItem('clarity_accent_color') || '#10b981';
+        const savedFont = localStorage.getItem('clarity_font_family') || 'inter';
+        applyDynamicStyles(savedColor, savedFont);
     } catch (e) {
-        console.error("Failed to load background from localStorage", e);
-        localStorage.removeItem(BACKGROUND_KEY);
+        console.error("Failed to load settings on startup in App.tsx", e);
     }
   }, []);
   
@@ -188,21 +201,34 @@ const App: FC = () => {
           onLoginClick={() => setIsLoginModalOpen(true)}
           onSignUpClick={() => setIsSignUpModalOpen(true)}
           onLogout={handleLogout}
-          onToggleAppearancePanel={() => setIsAppearancePanelOpen(prev => !prev)}
-          onToggleNotificationsPanel={() => setIsNotificationsPanelOpen(prev => !prev)}
-          onToggleLanguagePanel={() => setIsLanguagePanelOpen(prev => !prev)}
+          onToggleAppearancePanel={() => { setIsAppearancePanelOpen(prev => !prev); setIsNotificationsPanelOpen(false); setIsWalletPanelOpen(false); setIsDownloadPanelOpen(false); setIsLanguagePanelOpen(false); setIsSettingsModalOpen(false); }}
+          onToggleNotificationsPanel={() => { setIsNotificationsPanelOpen(prev => !prev); setIsAppearancePanelOpen(false); setIsWalletPanelOpen(false); setIsDownloadPanelOpen(false); setIsLanguagePanelOpen(false); setIsSettingsModalOpen(false); }}
+          onToggleWalletPanel={() => { setIsWalletPanelOpen(prev => !prev); setIsNotificationsPanelOpen(false); setIsAppearancePanelOpen(false); setIsDownloadPanelOpen(false); setIsLanguagePanelOpen(false); setIsSettingsModalOpen(false); }}
+          onToggleDownloadPanel={() => { setIsDownloadPanelOpen(prev => !prev); setIsNotificationsPanelOpen(false); setIsAppearancePanelOpen(false); setIsWalletPanelOpen(false); setIsLanguagePanelOpen(false); setIsSettingsModalOpen(false); }}
+          onToggleLanguagePanel={() => { setIsLanguagePanelOpen(prev => !prev); setIsAppearancePanelOpen(false); setIsNotificationsPanelOpen(false); setIsWalletPanelOpen(false); setIsDownloadPanelOpen(false); setIsSettingsModalOpen(false); }}
+          onSettingsClick={() => { setIsSettingsModalOpen(prev => !prev); setIsAppearancePanelOpen(false); setIsNotificationsPanelOpen(false); setIsWalletPanelOpen(false); setIsDownloadPanelOpen(false); setIsLanguagePanelOpen(false); }}
+          onClarityAboutClick={() => setIsClarityPopupOpen(true)}
         />
-        <main className={`flex-1 w-full ${activeView !== 'chatbot' ? 'container mx-auto px-4 sm:px-6 lg:px-8' : ''}`}>
+        <main className={`flex-1 w-full ${activeView !== 'chatbot' ? 'max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8' : ''}`}>
           {renderContent()}
         </main>
         <Footer onNavigate={navigate} />
+
+        <ClarityPopup 
+          isOpen={isClarityPopupOpen}
+          onClose={() => setIsClarityPopupOpen(false)}
+        />
 
         <LoginModal 
           isOpen={isLoginModalOpen} 
           onClose={() => setIsLoginModalOpen(false)}
           onLoginSuccess={handleLoginSuccess}
         />
-        <SignUpModal isOpen={isSignUpModalOpen} onClose={() => setIsSignUpModalOpen(false)} />
+        <SignUpModal 
+          isOpen={isSignUpModalOpen} 
+          onClose={() => setIsSignUpModalOpen(false)} 
+          onSignUpSuccess={handleLoginSuccess}
+        />
         <AppearancePanel 
           isOpen={isAppearancePanelOpen}
           onClose={() => setIsAppearancePanelOpen(false)}
@@ -213,9 +239,21 @@ const App: FC = () => {
             isOpen={isNotificationsPanelOpen}
             onClose={() => setIsNotificationsPanelOpen(false)}
         />
+        <WalletPanel
+            isOpen={isWalletPanelOpen}
+            onClose={() => setIsWalletPanelOpen(false)}
+        />
+        <DownloadPanel
+            isOpen={isDownloadPanelOpen}
+            onClose={() => setIsDownloadPanelOpen(false)}
+        />
         <LanguageSwitcher
             isOpen={isLanguagePanelOpen}
             onClose={() => setIsLanguagePanelOpen(false)}
+        />
+        <SettingsModal
+            isOpen={isSettingsModalOpen}
+            onClose={() => setIsSettingsModalOpen(false)}
         />
         <ChatWidget 
             isOpen={isChatWidgetOpen}
@@ -225,6 +263,7 @@ const App: FC = () => {
             onSendMessage={handleSendChatMessage}
             isSending={isSendingMessage}
         />
+        <LaraVoiceAssistant currentView={activeView} onNavigate={navigate} />
       </div>
     </div>
   );

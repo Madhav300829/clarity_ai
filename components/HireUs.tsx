@@ -9,6 +9,8 @@ import { FilterPanel, Filters, initialFilters } from './FilterPanel';
 import { StarRating } from './ui/StarRating';
 import { Button } from './ui/Button';
 import { useTranslation } from '../context/LanguageContext';
+import { HiringPaymentModal } from './HiringPaymentModal';
+import { ShieldAlert, ShieldCheck, HeartHandshake, CheckSquare } from 'lucide-react';
 
 const freelancers: FreelancerProfile[] = [
   {
@@ -61,9 +63,10 @@ interface FreelancerCardProps {
     freelancer: FreelancerProfile;
     colors: typeof colorSchemes[0];
     onStartChat: (freelancer: FreelancerProfile) => void;
+    onStartPayment: (freelancer: FreelancerProfile) => void;
 }
 
-const FreelancerCard: FC<FreelancerCardProps> = ({ freelancer, colors, onStartChat }) => {
+const FreelancerCard: FC<FreelancerCardProps> = ({ freelancer, colors, onStartChat, onStartPayment }) => {
     const { t } = useTranslation();
     return (
     <div className={`bg-primary dark:bg-slate-800 rounded-xl p-6 flex flex-col items-center text-center shadow-md hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 border border-slate-200 dark:border-slate-700 ${colors.border}`}>
@@ -79,9 +82,15 @@ const FreelancerCard: FC<FreelancerCardProps> = ({ freelancer, colors, onStartCh
                 <span key={skill} className={`${colors.bg} ${colors.text} text-xs font-medium px-2.5 py-1 rounded-full`}>{skill}</span>
             ))}
         </div>
-        <div className="mt-auto flex items-center justify-between w-full pt-4 border-t border-slate-200 dark:border-slate-700">
-             <span className="text-2xl font-bold text-dark dark:text-secondary">${freelancer.rate}<span className="text-sm font-normal text-light dark:text-slate-400">/{t('common.hourAbr')}</span></span>
-             <button onClick={() => onStartChat(freelancer)} className="bg-accent text-white font-bold py-2 px-4 rounded-lg hover:bg-green-600 transition-colors">{t('common.contact')}</button>
+        <div className="mt-auto flex flex-col gap-3 w-full pt-4 border-t border-slate-200 dark:border-slate-700">
+             <div className="flex items-center justify-between w-full">
+                 <span className="text-2xl font-bold text-dark dark:text-secondary">${freelancer.rate}<span className="text-sm font-normal text-light dark:text-slate-400">/{t('common.hourAbr')}</span></span>
+                 <span className="text-[10px] font-semibold text-emerald-500 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">Escrow Safe</span>
+             </div>
+             <div className="grid grid-cols-2 gap-2">
+                 <button onClick={() => onStartChat(freelancer)} className="bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-800 dark:text-white font-bold py-2 px-3 rounded-lg text-xs transition-colors">{t('common.contact')}</button>
+                 <button onClick={() => onStartPayment(freelancer)} className="bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-bold py-2 px-3 rounded-lg text-xs transition-all shadow-sm">Hire & Pay</button>
+             </div>
         </div>
     </div>
 )}
@@ -94,6 +103,7 @@ export const HireUs: FC<HireUsProps> = ({ onStartChat }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filters, setFilters] = useState<Filters>(initialFilters);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [selectedFreelancerForPay, setSelectedFreelancerForPay] = useState<FreelancerProfile | null>(null);
   const filterPanelRef = useRef<HTMLDivElement>(null);
   const { t } = useTranslation();
 
@@ -157,6 +167,29 @@ export const HireUs: FC<HireUsProps> = ({ onStartChat }) => {
             <h1 className="text-4xl md:text-5xl font-extrabold text-dark dark:text-primary font-display [text-shadow:0_1px_2px_rgba(0,0,0,0.2)] dark:[text-shadow:0_2px_4px_rgba(0,0,0,0.5)]">{t('hire.title')}</h1>
             <p className="mt-2 text-lg text-light dark:text-slate-400 [text-shadow:0_1px_2px_rgba(0,0,0,0.2)] dark:[text-shadow:0_2px_4px_rgba(0,0,0,0.5)]">{t('hire.subtitle')}</p>
         </div>
+
+        {/* Dynamic Secured Escrow Informational Banner */}
+        <div className="mb-8 p-5 bg-gradient-to-r from-emerald-500/10 via-teal-500/5 to-transparent rounded-3xl border border-emerald-500/20 max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-4 text-center md:text-left">
+          <div className="p-3 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 rounded-2xl">
+            <ShieldCheck className="w-8 h-8 animate-pulse" />
+          </div>
+          <div className="flex-1">
+            <h4 className="font-bold text-slate-900 dark:text-white text-base">Clarity 100% Secure Escrow Deposit Guarantee</h4>
+            <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed mt-0.5">
+              Hiring via Clarity.AI protects your capital. Your paid deposits are held securely in independent contract vaults until you inspect the progress files and digitally approve release. No upfront risk.
+            </p>
+          </div>
+          <div className="flex items-center gap-4 text-xs font-mono font-semibold text-slate-400 border-l border-slate-200 dark:border-slate-800 pl-4 py-2">
+            <div className="text-center">
+              <span className="text-emerald-500 font-bold block text-sm">$0.00</span>
+              No Setup Fee
+            </div>
+            <div className="text-center">
+              <img src="https://img.icons8.com/color/48/000000/stripe.png" alt="Stripe Secured Partner" className="h-6 mx-auto mb-0.5" />
+              Verified Core partner
+            </div>
+          </div>
+        </div>
         
         <div className="mb-6 max-w-2xl mx-auto flex items-center gap-4 animate-slide-up" style={{ animationDelay: '50ms' }}>
             <div className="relative flex-grow">
@@ -172,6 +205,24 @@ export const HireUs: FC<HireUsProps> = ({ onStartChat }) => {
                     aria-label={t('hire.aria.filterFreelancers')}
                 />
             </div>
+            <button
+                onClick={() => {
+                  const headers = ["ID", "Name", "Title", "Hour Rate (USD)", "Domain", "Experience (Years)", "Rating"];
+                  const rows = filteredFreelancers.map(f => [f.id, `"${f.name}"`, `"${f.title}"`, f.rate, `"${f.domain}"`, f.experience, f.rating]);
+                  const csvContent = "data:text/csv;charset=utf-8," + [headers.join(","), ...rows.map(e => e.join(","))].join("\n");
+                  const encodedUri = encodeURI(csvContent);
+                  const link = document.createElement("a");
+                  link.setAttribute("href", encodedUri);
+                  link.setAttribute("download", `clarity_freelancers_directory.csv`);
+                  document.body.appendChild(link);
+                  link.click();
+                  link.remove();
+                }}
+                className="py-3 px-4 border-2 border-emerald-500 hover:border-emerald-600 text-emerald-600 dark:text-emerald-450 hover:text-white hover:bg-emerald-500 font-bold rounded-full transition-all flex items-center gap-1.5 focus:outline-none"
+                title="Export Filtered Freelancers list as CSV spreadsheet"
+            >
+              ⬇️ Export
+            </button>
             <div ref={filterPanelRef} className="relative">
                 <Button variant="secondary" onClick={() => setIsFilterOpen(p => !p)} className="py-3 px-4">
                     <FilterIcon className="w-5 h-5 mr-2" />
@@ -202,6 +253,7 @@ export const HireUs: FC<HireUsProps> = ({ onStartChat }) => {
                         freelancer={freelancer} 
                         colors={colorSchemes[index % colorSchemes.length]}
                         onStartChat={onStartChat}
+                        onStartPayment={(f) => setSelectedFreelancerForPay(f)}
                     />
                 ))
             ) : (
@@ -211,6 +263,13 @@ export const HireUs: FC<HireUsProps> = ({ onStartChat }) => {
             )}
         </div>
       </div>
+
+      {/* Renders the secure payment gateway popup modal when freelancer is selected */}
+      <HiringPaymentModal 
+        isOpen={selectedFreelancerForPay !== null}
+        onClose={() => setSelectedFreelancerForPay(null)}
+        freelancer={selectedFreelancerForPay}
+      />
     </div>
   );
 };

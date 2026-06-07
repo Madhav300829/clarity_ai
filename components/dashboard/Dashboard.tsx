@@ -280,6 +280,57 @@ const WalletCard: FC = () => {
 };
 
 
+const ProfileCard: FC = () => {
+    const [name, setName] = useState('Madhav Kalsiya');
+    const [role, setRole] = useState('Full Stack AI Specialist');
+    const [email, setEmail] = useState('madhav@clarity.ai');
+    const [status, setStatus] = useState('Bringing clarity to complex challenges.');
+
+    const loadProfile = () => {
+        setName(localStorage.getItem('clarity_user_name') || 'Madhav Kalsiya');
+        setRole(localStorage.getItem('clarity_user_role') || 'Full Stack AI Specialist');
+        setEmail(localStorage.getItem('clarity_user_email') || 'madhav@clarity.ai');
+        setStatus(localStorage.getItem('clarity_user_status') || 'Bringing clarity to complex challenges.');
+    };
+
+    useEffect(() => {
+        loadProfile();
+        window.addEventListener('settings_updated', loadProfile);
+        return () => window.removeEventListener('settings_updated', loadProfile);
+    }, []);
+
+    const initials = name
+        .split(' ')
+        .map(n => n[0])
+        .join('')
+        .toUpperCase()
+        .slice(0, 2);
+
+    return (
+        <div className="bg-primary dark:bg-slate-800 rounded-lg shadow-lg border border-slate-200 dark:border-slate-700 p-6 relative overflow-hidden text-left">
+            <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-emerald-500 to-teal-500 bg-accent"></div>
+            
+            <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-extrabold text-sm flex items-center justify-center border border-emerald-500/20 bg-accent/20">
+                    {initials || 'U'}
+                </div>
+                <div className="min-w-0 flex-1">
+                    <h4 className="text-sm font-extrabold text-dark dark:text-secondary truncate">{name}</h4>
+                    <p className="text-[11px] text-accent font-semibold truncate leading-tight mt-0.5">{role}</p>
+                    <p className="text-[9px] text-slate-400 dark:text-slate-500 truncate mt-0.5">{email}</p>
+                </div>
+            </div>
+
+            <div className="mt-4 pt-3 border-t border-slate-200/50 dark:border-slate-700/50">
+                <span className="text-[8px] font-extrabold text-slate-400 uppercase tracking-wider block">Bio Motto Tagline</span>
+                <p className="text-[11px] text-slate-550 dark:text-slate-450 italic mt-0.5 leading-snug">
+                    "{status}"
+                </p>
+            </div>
+        </div>
+    );
+};
+
 interface DashboardProps {
     navigate: (view: View) => void;
 }
@@ -288,9 +339,31 @@ export const Dashboard: FC<DashboardProps> = ({ navigate }) => {
     const { t } = useTranslation();
     return (
         <div className="py-8 animate-fade-in mb-16 md:mb-0">
-             <div className="animate-slide-up">
-                <h1 className="text-4xl md:text-5xl font-extrabold text-dark dark:text-primary font-display [text-shadow:0_1px_2px_rgba(0,0,0,0.2)] dark:[text-shadow:0_2px_4px_rgba(0,0,0,0.5)]">{t('dashboard.title')}</h1>
-                <p className="mt-2 text-lg text-light dark:text-slate-400 [text-shadow:0_1px_2px_rgba(0,0,0,0.2)] dark:[text-shadow:0_2px_4px_rgba(0,0,0,0.5)]">{t('dashboard.subtitle')}</p>
+             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b border-slate-200 dark:border-slate-800 pb-4 animate-slide-up">
+                <div>
+                    <h1 className="text-4xl md:text-5xl font-extrabold text-dark dark:text-primary font-display [text-shadow:0_1px_2px_rgba(0,0,0,0.2)] dark:[text-shadow:0_2px_4px_rgba(0,0,0,0.5)]">{t('dashboard.title')}</h1>
+                    <p className="mt-2 text-lg text-light dark:text-slate-400 [text-shadow:0_1px_2px_rgba(0,0,0,0.2)] dark:[text-shadow:0_2px_4px_rgba(0,0,0,0.5)]">{t('dashboard.subtitle')}</p>
+                </div>
+                <button
+                    onClick={() => {
+                        const dashboardData = {
+                          tasks: mockTasks,
+                          recent_qa: initialQuestions,
+                          featured_experts: freelancers,
+                          timestamp: new Date().toISOString()
+                        };
+                        const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(dashboardData, null, 2));
+                        const link = document.createElement('a');
+                        link.setAttribute("href", dataStr);
+                        link.setAttribute("download", `clarity_dashboard_report_${Date.now()}.json`);
+                        document.body.appendChild(link);
+                        link.click();
+                        link.remove();
+                    }}
+                    className="mt-4 sm:mt-0 px-4 py-2 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-650 text-white text-xs font-bold rounded-xl shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-1.5 self-start"
+                >
+                  ⬇️ Download Dashboard Report
+                </button>
             </div>
             <div className="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
                 <div className="lg:col-span-2 space-y-8">
@@ -312,6 +385,7 @@ export const Dashboard: FC<DashboardProps> = ({ navigate }) => {
                     </DashboardCard>
                 </div>
                 <div className="lg:col-span-1 space-y-8">
+                    <ProfileCard />
                     <WalletCard />
                     <DashboardCard title={t('dashboard.featuredExperts.title')} icon={<UserIcon />}>
                         <div className="space-y-4">

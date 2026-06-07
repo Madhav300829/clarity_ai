@@ -1,8 +1,7 @@
 
 
 import React, { useState, useEffect, useRef, FC, FormEvent } from 'react';
-import { Chat as GenAIChat } from '@google/genai';
-import { startChat } from '../services/geminiService';
+import { startChat, ProxyChat } from '../services/geminiService';
 import { ChatMessage, ChatRole } from '../types';
 import { Button } from './ui/Button';
 import { PaperAirplaneIcon, SparklesIcon, UserIcon } from './icons/Icons';
@@ -60,7 +59,7 @@ const ChatBubble: FC<{ message: ChatMessage }> = ({ message }) => {
 };
 
 export const Chatbot: FC = () => {
-    const [chat, setChat] = useState<GenAIChat | null>(null);
+    const [chat, setChat] = useState<ProxyChat | null>(null);
     const [messages, setMessages] = useState<ChatMessage[]>([]);
     const [input, setInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -168,6 +167,29 @@ export const Chatbot: FC = () => {
 
     return (
         <div className="flex flex-col h-full max-w-4xl mx-auto py-4">
+            <div className="flex justify-between items-center pb-3 mb-4 border-b border-slate-200 dark:border-slate-800">
+                <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <h2 className="text-xs font-extrabold text-slate-700 dark:text-slate-300 uppercase tracking-wider">Clarity AI Assistant</h2>
+                </div>
+                {messages.length > 0 && (
+                    <button
+                        onClick={() => {
+                            const chatText = messages.map(m => `${m.role.toUpperCase()}: ${m.text}`).join('\n\n');
+                            const blob = new Blob([chatText], { type: 'text/plain;charset=utf-8' });
+                            const url = URL.createObjectURL(blob);
+                            const link = document.createElement('a');
+                            link.href = url;
+                            link.download = `clarity_assistant_transcript_${Date.now()}.txt`;
+                            link.click();
+                            URL.revokeObjectURL(url);
+                        }}
+                        className="text-[11px] font-bold text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 flex items-center gap-1 bg-emerald-500/10 dark:bg-emerald-500/20 px-2.5 py-1 rounded-lg transition-all"
+                    >
+                        ⬇️ Download Chat Transcript
+                    </button>
+                )}
+            </div>
             <div className="flex-1 overflow-y-auto pr-4 space-y-6 pb-4">
                 {messages.length <= 1 && !hasInitiatedChat.current && !isLoading && (
                     <div className="text-center pt-8 md:pt-16 text-slate-400 animate-fade-in">

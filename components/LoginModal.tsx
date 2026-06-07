@@ -6,6 +6,7 @@ import { UserGroupIcon, AcademicCapIcon, DevicePhoneMobileIcon, EnvelopeIcon } f
 import { OtpInput } from './ui/OtpInput';
 import { CountryCodeInput } from './ui/CountryCodeInput';
 import { useTranslation } from '../context/LanguageContext';
+import { authenticateUser, authenticateUserByPhone, resetUserPassword, getRegisteredUsers } from '../services/authService';
 
 interface LoginModalProps {
     isOpen: boolean;
@@ -50,20 +51,24 @@ export const LoginModal: FC<LoginModalProps> = ({ isOpen, onClose, onLoginSucces
         setStep('method');
     };
 
-    const handleLoginSubmit = (e: FormEvent) => {
+    const handleLoginSubmit = async (e: FormEvent) => {
         e.preventDefault();
         setError(null);
         setIsSubmitting(true);
-        setTimeout(() => {
-            if (email === 'test@example.com' && password === 'password') {
-                console.log(`Logged in as: ${role} with email: ${email}`);
+        try {
+            const result = await authenticateUser(email, password);
+            if (result.success) {
+                console.log(`Logged in as: ${result.user?.role} with email: ${email}`);
                 setIsSubmitting(false);
                 onLoginSuccess();
             } else {
                 setError(t('error.auth.invalidCredentials'));
                 setIsSubmitting(false);
             }
-        }, 1500);
+        } catch (e) {
+            setError(t('error.auth.unknown'));
+            setIsSubmitting(false);
+        }
     };
 
     const handlePhoneSubmit = (e: FormEvent) => {
@@ -76,19 +81,38 @@ export const LoginModal: FC<LoginModalProps> = ({ isOpen, onClose, onLoginSucces
         }, 1000);
     };
 
-    const handleOtpComplete = (otp: string) => {
+    const handleOtpComplete = async (otp: string) => {
         setIsSubmitting(true);
         setError(null);
-        setTimeout(() => {
+        try {
             if (otp === '123456') {
-                console.log(`Verified OTP for phone: ${countryCode}${phoneNumber}`);
+                const fullPhone = `${countryCode}${phoneNumber}`;
+                console.log(`Verified OTP for phone: ${fullPhone}`);
+                
+                // Attempt to authenticate the user by stored phone number
+                const result = await authenticateUserByPhone(fullPhone);
+                if (result.success) {
+                    console.log(`Matched registered phone user: ${result.user?.name}`);
+                } else {
+                    // Seed guest user session variables to make the app interactive
+                    if (typeof window !== 'undefined') {
+                        localStorage.setItem('clarity_user_name', `Client ${phoneNumber.slice(-4)}`);
+                        localStorage.setItem('clarity_user_role', 'Verified Client');
+                        localStorage.setItem('clarity_user_email', `client.${phoneNumber.slice(-4)}@clarity.ai`);
+                        localStorage.setItem('clarity_user_status', 'Exploring interactive expert solutions.');
+                        window.dispatchEvent(new Event('settings_updated'));
+                    }
+                }
                 setIsSubmitting(false);
                 onLoginSuccess();
             } else {
                 setError(t('error.auth.invalidOtp'));
                 setIsSubmitting(false);
             }
-        }, 1500);
+        } catch (e) {
+            setError(t('error.auth.unknown'));
+            setIsSubmitting(false);
+        }
     };
     
     const handleForgotPasswordSubmit = (e: FormEvent) => {
@@ -96,13 +120,20 @@ export const LoginModal: FC<LoginModalProps> = ({ isOpen, onClose, onLoginSucces
         setIsSubmitting(true);
         setError(null);
         setTimeout(() => {
+            const users = getRegisteredUsers();
+            const userExists = users.some(u => u.email.toLowerCase() === email.toLowerCase());
+            if (email.toLowerCase() !== 'test@example.com' && !userExists) {
+                setError("No account found with this email. Please register an account first.");
+                setIsSubmitting(false);
+                return;
+            }
             console.log(`Sending reset link to ${email}`);
             setIsSubmitting(false);
             setStep('resetLinkSent');
-        }, 1500);
+        }, 1200);
     }
 
-    const handleResetPasswordSubmit = (e: FormEvent) => {
+    const handleResetPasswordSubmit = async (e: FormEvent) => {
         e.preventDefault();
         if (newPassword !== confirmNewPassword) {
             setError(t('error.auth.passwordsDoNotMatch'));
@@ -110,11 +141,21 @@ export const LoginModal: FC<LoginModalProps> = ({ isOpen, onClose, onLoginSucces
         }
         setIsSubmitting(true);
         setError(null);
-        setTimeout(() => {
-            console.log(`Password reset for ${email}`);
-            alert(t('loginModal.passwordResetSuccess'));
-            setStep('email');
-        }, 1500);
+        try {
+            const result = await resetUserPassword(email, newPassword);
+            if (result.success) {
+                console.log(`Password reset for ${email}`);
+                alert(t('loginModal.passwordResetSuccess') || "Password has been reset successfully! You can now log in.");
+                setPassword(newPassword); // update password in login form memory for convenience
+                setStep('email');
+            } else {
+                setError(result.error || t('error.auth.unknown'));
+            }
+        } catch (err) {
+            setError(t('error.auth.unknown'));
+        } finally {
+            setIsSubmitting(false);
+        }
     }
 
     const RoleButton: FC<{ roleType: UserRole, title: string, description: string, icon: React.ReactNode, onClick: () => void }> = ({ roleType, title, description, icon, onClick }) => (

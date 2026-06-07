@@ -98,6 +98,40 @@ export const verifyOtp = async (fullPhoneNumber: string, otp: string): Promise<A
     }
 };
 
+export interface UserAccount {
+    name: string;
+    email: string;
+    phone: string;
+    role: 'consumer' | 'expert';
+    password?: string;
+    degree?: string;
+    category?: string;
+}
+
+export const getRegisteredUsers = (): UserAccount[] => {
+    if (typeof window === 'undefined') return [];
+    try {
+        const usersJson = localStorage.getItem('clarity-ai-registered-users');
+        if (usersJson) {
+            return JSON.parse(usersJson);
+        }
+    } catch (e) {
+        console.error("Failed to parse registered users", e);
+    }
+    // Return default test user
+    return [
+        {
+            name: 'Madhav Kalsiya',
+            email: 'test@example.com',
+            phone: '+15551234567',
+            role: 'expert',
+            password: 'password',
+            degree: 'Full Stack AI Specialist',
+            category: 'Computer Science & IT'
+        }
+    ];
+};
+
 /**
  * Simulates the final step of creating a user account after OTP verification.
  * In a real app, this would be a final call to your user creation endpoint.
@@ -110,9 +144,122 @@ export const createUserAccount = async (userData: any): Promise<AuthResult> => {
     // Simulate network delay for the final step.
     await new Promise(resolve => setTimeout(resolve, 1000));
     
-    // In a real application, you would make a POST request to your backend here
-    // with all the userData to persist it in your database.
-    console.log('[Auth Service] User account created:', userData);
+    if (typeof window !== 'undefined') {
+        try {
+            const users = getRegisteredUsers();
+            
+            // Check if email already exists
+            const emailExists = users.some((u: any) => u.email.toLowerCase() === userData.email.toLowerCase());
+            if (emailExists) {
+                console.error("[Auth Service] Email already registered:", userData.email);
+                return { success: false, errorCode: 'ACCOUNT_CREATION_FAILED' };
+            }
+            
+            users.push(userData);
+            localStorage.setItem('clarity-ai-registered-users', JSON.stringify(users));
+            
+            // Also automatically store this newly registered user as the active user session!
+            localStorage.setItem('clarity_user_name', userData.name);
+            localStorage.setItem('clarity_user_role', userData.category || (userData.role === 'expert' ? 'Specialist Expert' : 'Regular Consumer'));
+            localStorage.setItem('clarity_user_email', userData.email);
+            localStorage.setItem('clarity_user_status', userData.degree || 'Bringing clarity to complex challenges.');
+            
+            // Trigger state update event
+            window.dispatchEvent(new Event('settings_updated'));
+        } catch (e) {
+            console.error("Failed to store user in localStorage", e);
+            return { success: false, errorCode: 'SESSION_ERROR' };
+        }
+    }
 
+    console.log('[Auth Service] User account created:', userData);
     return { success: true };
+};
+
+/**
+ * Authenticate user with email and password.
+ */
+export const authenticateUser = async (email: string, password: string): Promise<{ success: boolean; user?: UserAccount; error?: string }> => {
+    // Simulate network delay
+    await new Promise(resolve => setTimeout(resolve, 800));
+    
+    const users = getRegisteredUsers();
+    const user = users.find(u => u.email.toLowerCase() === email.toLowerCase() && u.password === password);
+    
+    if (user) {
+        if (typeof window !== 'undefined') {
+            localStorage.setItem('clarity_user_name', user.name);
+            localStorage.setItem('clarity_user_role', user.category || (user.role === 'expert' ? 'Specialist Expert' : 'Regular Consumer'));
+            localStorage.setItem('clarity_user_email', user.email);
+            localStorage.setItem('clarity_user_status', user.degree || 'Bringing clarity to complex challenges.');
+            window.dispatchEvent(new Event('settings_updated'));
+        }
+        return { success: true, user };
+    }
+    return { success: false, error: 'invalidCredentials' };
+};
+
+/**
+ * Authenticate user by phone number (if matching digits after clean-up)
+ */
+export const authenticateUserByPhone = async (phone: string): Promise<{ success: boolean; user?: UserAccount }> => {
+    const users = getRegisteredUsers();
+    const cleanedPhone = phone.replace(/[^\d]/g, '');
+    const user = users.find(u => u.phone.replace(/[^\d]/g, '') === cleanedPhone);
+    
+    if (user) {
+        if (typeof window !== 'undefined') {
+            localStorage.setItem('clarity_user_name', user.name);
+            localStorage.setItem('clarity_user_role', user.category || (user.role === 'expert' ? 'Specialist Expert' : 'Regular Consumer'));
+            localStorage.setItem('clarity_user_email', user.email);
+            localStorage.setItem('clarity_user_status', user.degree || 'Bringing clarity to complex challenges.');
+            window.dispatchEvent(new Event('settings_updated'));
+        }
+        return { success: true, user };
+    }
+    return { success: false };
+};
+
+/**
+ * Resets the password of a registered user by email in local storage.
+ */
+export const resetUserPassword = async (email: string, newPassword: string): Promise<{ success: boolean; error?: string }> => {
+    await new Promise(resolve => setTimeout(resolve, 800));
+    
+    if (typeof window !== 'undefined') {
+        try {
+            const users = getRegisteredUsers();
+            
+            // Allow resetting test@example.com too
+            const userIndex = users.findIndex(u => u.email.toLowerCase() === email.toLowerCase());
+            
+            if (userIndex !== -1) {
+                users[userIndex].password = newPassword;
+                localStorage.setItem('clarity-ai-registered-users', JSON.stringify(users));
+                return { success: true };
+            }
+            
+            // If it's test@example.com and somehow wasn't backed up in localStorage yet, we seed it first
+            if (email.toLowerCase() === 'test@example.com') {
+                const defaultUser = {
+                    name: 'Madhav Kalsiya',
+                    email: 'test@example.com',
+                    phone: '+15551234567',
+                    role: 'expert' as const,
+                    password: newPassword,
+                    degree: 'Full Stack AI Specialist',
+                    category: 'Computer Science & IT'
+                };
+                users.push(defaultUser);
+                localStorage.setItem('clarity-ai-registered-users', JSON.stringify(users));
+                return { success: true };
+            }
+            
+            return { success: false, error: 'No account found with this email. Please check your spelling.' };
+        } catch (e) {
+            console.error("Failed to update password in localStorage", e);
+            return { success: false, error: 'Database or storage error.' };
+        }
+    }
+    return { success: false, error: 'Platform not available.' };
 };

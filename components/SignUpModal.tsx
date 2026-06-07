@@ -11,12 +11,13 @@ import { sendOtp, verifyOtp, createUserAccount } from '../services/authService';
 interface SignUpModalProps {
     isOpen: boolean;
     onClose: () => void;
+    onSignUpSuccess?: () => void;
 }
 
 type SignUpStep = 'role' | 'form' | 'otp';
 type UserRole = 'consumer' | 'expert';
 
-export const SignUpModal: FC<SignUpModalProps> = ({ isOpen, onClose }) => {
+export const SignUpModal: FC<SignUpModalProps> = ({ isOpen, onClose, onSignUpSuccess }) => {
     const [step, setStep] = useState<SignUpStep>('role');
     const [role, setRole] = useState<UserRole | null>(null);
     const [name, setName] = useState('');
@@ -25,6 +26,8 @@ export const SignUpModal: FC<SignUpModalProps> = ({ isOpen, onClose }) => {
     const [phoneNumber, setPhoneNumber] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [degree, setDegree] = useState('');
+    const [category, setCategory] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const { t } = useTranslation();
@@ -40,6 +43,8 @@ export const SignUpModal: FC<SignUpModalProps> = ({ isOpen, onClose }) => {
             setCountryCode('+1');
             setPassword('');
             setConfirmPassword('');
+            setDegree('');
+            setCategory('');
             setIsSubmitting(false);
             setError(null);
         }
@@ -61,7 +66,18 @@ export const SignUpModal: FC<SignUpModalProps> = ({ isOpen, onClose }) => {
             if (result.success) {
                 setStep('otp');
             } else {
-                setError(t(`error.auth.${result.errorCode}`));
+                const errorCode = result.errorCode;
+                if (errorCode === 'TOKEN_MISSING') {
+                    setError(t('error.auth.tokenMissing'));
+                } else if (errorCode === 'SESSION_ERROR') {
+                    setError(t('error.auth.sessionError'));
+                } else if (errorCode === 'INVALID_PHONE') {
+                    setError(t('error.auth.invalidPhoneNumber'));
+                } else if (errorCode === 'NETWORK_ERROR') {
+                    setError(t('error.auth.networkError'));
+                } else {
+                    setError(t('error.auth.unknown'));
+                }
             }
         } catch (e) {
             setError(t('error.auth.unknown'));
@@ -80,19 +96,36 @@ export const SignUpModal: FC<SignUpModalProps> = ({ isOpen, onClose }) => {
             // Fix: Check for verification success first. This clarifies control flow
             // for TypeScript and fixes the property access error.
             if (verificationResult.success) {
-                const accountData = { name, email, phone: fullPhoneNumber, role, password };
+                const accountData = { name, email, phone: fullPhoneNumber, role, password, degree, category };
                 const creationResult = await createUserAccount(accountData);
 
                 // Fix: Similarly, check for account creation success, which also fixes the
                 // property access error on `creationResult.errorCode`.
                 if (creationResult.success) {
-                    alert(t('signUpModal.successMessage'));
+                    alert(t('signUpModal.successMessage') || "Registration successful!");
                     onClose();
+                    if (onSignUpSuccess) {
+                        onSignUpSuccess();
+                    }
                 } else {
-                    setError(t(`error.auth.${creationResult.errorCode}`));
+                    const errorCode = creationResult.errorCode;
+                    if (errorCode === 'ACCOUNT_CREATION_FAILED') {
+                        setError("This email address is already registered. Please login or use a different email.");
+                    } else if (errorCode === 'SESSION_ERROR') {
+                        setError(t('error.auth.sessionError'));
+                    } else {
+                        setError(t('error.auth.unknown'));
+                    }
                 }
             } else {
-                setError(t(`error.auth.${verificationResult.errorCode}`));
+                const errorCode = verificationResult.errorCode;
+                if (errorCode === 'INVALID_OTP') {
+                    setError(t('error.auth.invalidOtp'));
+                } else if (errorCode === 'SESSION_EXPIRED') {
+                    setError(t('error.auth.sessionExpired'));
+                } else {
+                    setError(t('error.auth.unknown'));
+                }
             }
         } catch (e) {
             setError(t('error.auth.unknown'));
@@ -160,6 +193,52 @@ export const SignUpModal: FC<SignUpModalProps> = ({ isOpen, onClose }) => {
                     />
                     <InputField id="signup-password" label={t('common.password')} type="password" placeholder="••••••••" value={password} onChange={e => setPassword(e.target.value)} required />
                     <InputField id="signup-confirm-password" label={t('signUpModal.confirmPassword')} type="password" placeholder="••••••••" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} required />
+                    
+                    {/* Education Details Segment */}
+                    <div className="border-t border-slate-200 dark:border-slate-750 pt-4 mt-2">
+                        <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-3 flex items-center gap-1.5">
+                            <AcademicCapIcon className="w-4 h-4 text-accent" />
+                            Academic Profile
+                        </label>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label htmlFor="signup-degree" className="block text-sm font-medium text-slate-600 dark:text-slate-400 mb-2">
+                                    Degree / Qualification
+                                </label>
+                                <input
+                                    id="signup-degree"
+                                    type="text"
+                                    placeholder="e.g. BS in Computer Science, PhD"
+                                    value={degree}
+                                    onChange={e => setDegree(e.target.value)}
+                                    className="w-full p-3 bg-primary dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-md focus:ring-2 focus:ring-accent focus:outline-none transition text-dark dark:text-secondary text-sm"
+                                    required
+                                />
+                            </div>
+                            <div>
+                                <label htmlFor="signup-category" className="block text-sm font-medium text-slate-600 dark:text-slate-400 mb-2">
+                                    Specialty Category
+                                </label>
+                                <select
+                                    id="signup-category"
+                                    value={category}
+                                    onChange={e => setCategory(e.target.value)}
+                                    className="w-full p-3 bg-primary dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-md focus:ring-2 focus:ring-accent focus:outline-none transition text-dark dark:text-secondary text-sm cursor-pointer"
+                                    required
+                                >
+                                    <option value="" disabled>Select category...</option>
+                                    <option value="Computer Science & IT">Computer Science & IT</option>
+                                    <option value="Engineering & Physics">Engineering & Physics</option>
+                                    <option value="Business, Finance & Economics">Business, Finance & Economics</option>
+                                    <option value="Medicine, Biology & Health">Medicine, Biology & Health</option>
+                                    <option value="Design, Arts & Marketing">Design, Arts & Marketing</option>
+                                    <option value="Social Sciences & Education">Social Sciences & Education</option>
+                                    <option value="Other Specialization">Other Specialization</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
                     {error && <p className="text-sm text-rose-500 text-center">{error}</p>}
                     <div className="pt-2">
                         <Button
@@ -204,7 +283,12 @@ export const SignUpModal: FC<SignUpModalProps> = ({ isOpen, onClose }) => {
 
 
     return (
-        <Modal isOpen={isOpen} onClose={onClose} title={titles[step]}>
+        <Modal 
+            isOpen={isOpen} 
+            onClose={onClose} 
+            title={titles[step]}
+            maxWidthClass={step === 'form' ? 'max-w-2xl' : 'max-w-md'}
+        >
             {renderContent()}
         </Modal>
     );

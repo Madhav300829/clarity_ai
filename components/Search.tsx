@@ -101,7 +101,24 @@ export const Search: FC = () => {
           <div className="max-w-6xl mx-auto animate-slide-up grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2 space-y-8">
                 <div className="bg-primary dark:bg-slate-800 p-6 rounded-lg shadow-lg border border-slate-200 dark:border-slate-700">
-                  <h2 className="text-2xl font-bold mb-4 text-accent font-display">{t('search.results.summary')}</h2>
+                  <div className="flex justify-between items-center mb-4">
+                    <h2 className="text-2xl font-bold text-accent font-display">{t('search.results.summary')}</h2>
+                    <button
+                      onClick={() => {
+                        const reportText = `SEARCH QUERY REPORT\nQuery: ${query}\nDate: ${new Date().toLocaleDateString()}\n\nSUMMARY:\n${result.summary}\n\nKEY POINTS:\n${result.keyPoints?.map((p: string) => `- ${p}`).join('\n') || 'None'}\n\nSOURCES:\n${result.sources?.map((s: any) => `${s.web.title} (${s.web.uri})`).join('\n') || 'None'}`;
+                        const blob = new Blob([reportText], { type: 'text/plain;charset=utf-8' });
+                        const url = URL.createObjectURL(blob);
+                        const link = document.createElement('a');
+                        link.href = url;
+                        link.download = `clarity_search_report_${query.trim().replace(/\s+/g, '_')}.txt`;
+                        link.click();
+                        URL.revokeObjectURL(url);
+                      }}
+                      className="text-[11px] font-bold text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 flex items-center gap-1 bg-emerald-500/10 dark:bg-emerald-500/20 px-2.5 py-1 rounded-lg transition-all"
+                    >
+                      ⬇️ Download Report
+                    </button>
+                  </div>
                   <p className="text-dark dark:text-slate-300 whitespace-pre-wrap leading-relaxed">{result.summary}</p>
                 </div>
 

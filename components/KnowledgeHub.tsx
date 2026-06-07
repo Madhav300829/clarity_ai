@@ -254,6 +254,21 @@ export const KnowledgeHub: FC = () => {
                       aria-label={t('knowledge.aria.filter')}
                   />
               </div>
+              <button
+                onClick={() => {
+                  const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(qaItems, null, 2));
+                  const downloadAnchor = document.createElement('a');
+                  downloadAnchor.setAttribute("href",     dataStr);
+                  downloadAnchor.setAttribute("download", `clarity_knowledge_hub_${Date.now()}.json`);
+                  document.body.appendChild(downloadAnchor);
+                  downloadAnchor.click();
+                  downloadAnchor.remove();
+                }}
+                className="py-3 px-5 border-emerald-500 hover:border-emerald-600 border-2 text-emerald-600 dark:text-emerald-450 hover:text-white hover:bg-emerald-500 font-bold rounded-full transition-all flex items-center gap-1.5 focus:outline-none"
+                title="Export entire knowledge dataset as JSON"
+              >
+                ⬇️ Export Hub
+              </button>
               <Button onClick={() => setIsAskModalOpen(true)} className="py-3 px-5">{t('knowledge.askNewQuestion')}</Button>
           </div>
 

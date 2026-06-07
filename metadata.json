@@ -1,5 +1,6 @@
 {
   "name": "ClarityAI",
   "description": "A platform combining an AI Chatbot, Search Engine, Community Q&A, and Freelancer Marketplace to bring clarity to your tasks.",
-  "requestFramePermissions": []
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
