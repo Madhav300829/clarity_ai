@@ -1,4 +1,8 @@
 import React, { createContext, useState, useEffect, useContext, ReactNode, FC, useCallback } from 'react';
+import enTranslations from '../locales/en.json';
+import esTranslations from '../locales/es.json';
+import frTranslations from '../locales/fr.json';
+import deTranslations from '../locales/de.json';
 
 type Language = 'en' | 'es' | 'fr' | 'de';
 
@@ -11,7 +15,12 @@ interface LanguageContextType {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 const LANGUAGE_KEY = 'clarity-ai-language';
-const translationsCache: { [key in Language]?: any } = {};
+const translationsCache: { [key in Language]: any } = {
+  en: enTranslations,
+  es: esTranslations,
+  fr: frTranslations,
+  de: deTranslations
+};
 
 export const LanguageProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [language, setLanguageState] = useState<Language>(() => {
@@ -26,32 +35,11 @@ export const LanguageProvider: FC<{ children: ReactNode }> = ({ children }) => {
     return 'en';
   });
 
-  const [translations, setTranslations] = useState<any>({});
+  const [translations, setTranslations] = useState<any>(translationsCache[language] || enTranslations);
 
   useEffect(() => {
-    const loadTranslations = async (lang: Language) => {
-      if (translationsCache[lang]) {
-        setTranslations(translationsCache[lang]);
-        return;
-      }
-      try {
-        // Use fetch to load the JSON file. Assumes a `locales` folder in the public root.
-        const response = await fetch(`/locales/${lang}.json`);
-        if (!response.ok) {
-          throw new Error(`Could not load translations for language: ${lang}`);
-        }
-        const data = await response.json();
-        translationsCache[lang] = data;
-        setTranslations(data);
-      } catch (error) {
-        console.error(error);
-        // Fallback to English if the selected language fails to load
-        if (lang !== 'en') {
-          await loadTranslations('en');
-        }
-      }
-    };
-    loadTranslations(language);
+    // Synchronously set translations from statically loaded local records
+    setTranslations(translationsCache[language] || enTranslations);
   }, [language]);
 
   const setLanguage = (lang: Language) => {
